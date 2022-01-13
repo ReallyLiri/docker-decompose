@@ -1,0 +1,40 @@
+version: "3"
+services:
+    postgres_triple:
+        container_name: postgres_triple
+        image: postgres:9.5
+        volumes:
+            - pgdata_triple:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_PASSWORD=postgres
+        networks:
+            - db-net
+    postgres:
+        container_name: postgres
+        image: postgres:9.5
+        volumes:
+            - pgdata:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_PASSWORD=postgres
+        networks:
+            - db-net
+    collectiwise:
+        container_name: collectiwise
+        build: .
+        image: collectiwise/main:${COLL_TAG}
+        ports:
+            - "8090:80"
+        environment:
+            - COLLECTIWISE_BRANCH=${BRANCH}
+        networks:
+            - db-net
+volumes:
+    pgdata:
+    pgdata_triple:
+      driver_opts:
+        o: bind
+        type: none
+        device: "/var/pgdata/triple"
+
+networks:
+  db-net:
