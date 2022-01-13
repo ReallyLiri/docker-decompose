@@ -2,7 +2,7 @@ package decompose
 
 import (
 	"github.com/bmizerany/assert"
-	"github.com/joho/godotenv"
+	"github.com/compose-spec/godotenv"
 	"github.com/stretchr/testify/require"
 	"io/ioutil"
 	"os"
