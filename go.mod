@@ -5,6 +5,7 @@ go 1.17
 require (
 	github.com/bmizerany/assert v0.0.0-20160611221934-b7ed37b82869
 	github.com/compose-spec/compose-go v1.0.8
+	github.com/compose-spec/godotenv v1.1.1
 	github.com/joho/godotenv v1.4.0
 	github.com/stretchr/testify v1.6.1
 	github.com/urfave/cli/v2 v2.3.0
@@ -12,7 +13,6 @@ require (
 )
 
 require (
-	github.com/compose-spec/godotenv v1.1.1 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.0-20190314233015-f79a8a8ca69d // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/distribution/distribution/v3 v3.0.0-20210316161203-a01c71e2477e // indirect

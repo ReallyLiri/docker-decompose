@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/compose-spec/compose-go/loader"
 	"github.com/compose-spec/compose-go/types"
-	"github.com/joho/godotenv"
+	"github.com/compose-spec/godotenv"
 	"github.com/wesovilabs/koazee"
 	"io/ioutil"
 	"os"
