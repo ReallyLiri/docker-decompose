@@ -53,8 +53,8 @@ services:
 	require.Nil(t, err)
 	assert.Equal(t, 3, len(commands))
 	assert.Equal(t, `docker build -f "Dockerfile" -t "web" .`, commands[0])
-	assert.Equal(t, `docker run -n "web" -e "FLASK_ENV=development" -p "5000:5000" -v ".:/code" "web"`, commands[1])
-	assert.Equal(t, `docker run -n "redis" "redis:alpine"`, commands[2])
+	assert.Equal(t, `docker run -d --name "web" -e "FLASK_ENV=development" -p "5000:5000" -v ".:/code" "web"`, commands[1])
+	assert.Equal(t, `docker run -d --name "redis" "redis:alpine"`, commands[2])
 }
 
 func TestDecomposeComplex(t *testing.T) {
@@ -111,7 +111,7 @@ networks:
 	assert.Equal(t, 5, len(commands))
 	assert.Equal(t, `docker network create db-net`, commands[0])
 	assert.Equal(t, `docker build -f "Dockerfile" -t "collectiwise/main:l4t3st" .`, commands[1])
-	assert.Equal(t, `docker run -n "postgres_triple" -e "POSTGRES_PASSWORD=postgres" --network "db-net" --restart "unless-stopped" -v "/var/pgdata/triple:/var/lib/postgresql/data" "postgres:9.5"`, commands[2])
-	assert.Equal(t, `docker run -n "postgres" -e "POSTGRES_PASSWORD=postgres" --network "db-net" --restart "unless-stopped" -v "pgdata:/var/lib/postgresql/data" "postgres:9.5"`, commands[3])
-	assert.Equal(t, `docker run -n "collectiwise" -e "COLLECTIWISE_BRANCH=dev" --network "db-net" -p "8090:80" --restart "unless-stopped" "collectiwise/main:l4t3st"`, commands[4])
+	assert.Equal(t, `docker run -d --name "postgres_triple" -e "POSTGRES_PASSWORD=postgres" --network "db-net" --restart "unless-stopped" -v "/var/pgdata/triple:/var/lib/postgresql/data" "postgres:9.5"`, commands[2])
+	assert.Equal(t, `docker run -d --name "postgres" -e "POSTGRES_PASSWORD=postgres" --network "db-net" --restart "unless-stopped" -v "pgdata:/var/lib/postgresql/data" "postgres:9.5"`, commands[3])
+	assert.Equal(t, `docker run -d --name "collectiwise" -e "COLLECTIWISE_BRANCH=dev" --network "db-net" -p "8090:80" --restart "unless-stopped" "collectiwise/main:l4t3st"`, commands[4])
 }

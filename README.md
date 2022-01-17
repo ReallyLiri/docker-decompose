@@ -63,9 +63,9 @@ services:
 ```bash
 docker build -f "Dockerfile" -t "web" .
 
-docker run -n "web" -e "FLASK_ENV=development" -p "5000:5000" -v ".:/code" "web"
+docker run -d --name "web" -e "FLASK_ENV=development" -p "5000:5000" -v ".:/code" "web"
 
-docker run -n "redis" "redis:alpine"
+docker run -d --name "redis" "redis:alpine"
 ```
 
 ---------------
@@ -122,9 +122,9 @@ docker network create db-net
 
 docker build -f "Dockerfile" -t "collectiwise/main:l4t3st" .
 
-docker run -n "collectiwise" -e "COLLECTIWISE_BRANCH=dev" --network "db-net" -p "8090:80" "collectiwise/main:l4t3st"
+docker run -d --name "collectiwise" -e "COLLECTIWISE_BRANCH=dev" --network "db-net" -p "8090:80" "collectiwise/main:l4t3st"
 
-docker run -n "postgres_triple" -e "POSTGRES_PASSWORD=postgres" --network "db-net" -v "/var/pgdata/triple:/var/lib/postgresql/data" "postgres:9.5"
+docker run -d --name "postgres_triple" -e "POSTGRES_PASSWORD=postgres" --network "db-net" -v "/var/pgdata/triple:/var/lib/postgresql/data" "postgres:9.5"
 
-docker run -n "postgres" -e "POSTGRES_PASSWORD=postgres" --network "db-net" -v "pgdata:/var/lib/postgresql/data" "postgres:9.5"
+docker run -d --name "postgres" -e "POSTGRES_PASSWORD=postgres" --network "db-net" -v "pgdata:/var/lib/postgresql/data" "postgres:9.5"
 ```
