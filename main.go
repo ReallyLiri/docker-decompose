@@ -15,7 +15,7 @@ const (
 func declareCli() *cli.App {
 	cli.AppHelpTemplate =
 		`NAME:
-   {{.Name}} - {{.Usage}}
+   {{.Name}} - {{.Version}} - {{.Usage}}
 USAGE:
    {{.Name}} {{if .Flags}}[Options]{{end}} [compose-file] [service, ...]
 ARGS:
